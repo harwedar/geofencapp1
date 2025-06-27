@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 app.use(session({ secret: 'adminsecret', resave: false, saveUninitialized: true }));
 
-mongoose.connect('mongoose.connect('mongodb+srv://awedaolusina:synteqdeveloper@cluster0.prmgr.mongodb.net/geofencing?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect('mongodb+srv://awedaolusina:synteqdeveloper@cluster0.prmgr.mongodb.net/geofence?retryWrites=true&w=majority&appName=Cluster0');
 ', {
   useNewUrlParser: true,
   useUnifiedTopology: true
