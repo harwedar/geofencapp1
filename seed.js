@@ -1,7 +1,8 @@
 
 // seed.js
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://awedaolusina:synteqdeveloper@cluster0.prmgr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongoose.connect('mongodb+srv://awedaolusina:synteqdeveloper@cluster0.prmgr.mongodb.net/geofence?retryWrites=true&w=majority&appName=Cluster0');
+', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
