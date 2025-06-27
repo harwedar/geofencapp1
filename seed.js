@@ -1,7 +1,7 @@
 
 // seed.js
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/geofencing', {
+mongoose.connect('mongodb+srv://awedaolusina:jerryT030576@cluster0.prmgr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
