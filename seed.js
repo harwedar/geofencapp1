@@ -2,7 +2,7 @@
 // seed.js
 const mongoose = require('mongoose');
 mongoose.connect(
-  'mongodb+srv://SynteQ Technologies:developerSYNQ76@cluster0.aahlm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+  'mongodb+srv://user2:12345678user2@cluster0.aahlm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
