@@ -1,1 +1,39 @@
 ... (device HTML with push subscription and notifications) ...
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Device Tracker</title>
+</head>
+<body>
+  <h2>Mobile Device Tracker</h2>
+  <input type="text" id="deviceId" placeholder="Enter your Device ID" />
+  <button onclick="startTracking()">Start Tracking</button>
+
+  <p id="status">Not tracking</p>
+
+  <script>
+    function startTracking() {
+      const deviceId = document.getElementById('deviceId').value;
+      if (!deviceId) return alert('Device ID is required');
+
+      navigator.geolocation.watchPosition(async pos => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        const res = await fetch('/api/location-update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ deviceId, lat, lng })
+        });
+
+        const data = await res.json();
+        document.getElementById('status').innerText = data.inside
+          ? '✅ Inside region'
+          : '❌ OUTSIDE region';
+      }, err => {
+        alert('Error getting location: ' + err.message);
+      }, { enableHighAccuracy: true });
+    }
+  </script>
+</body>
+</html>
