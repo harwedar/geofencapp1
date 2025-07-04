@@ -130,7 +130,7 @@ app.get('/api/vapid-public-key', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(_dirname + 'admin.html');
+  res.sendFile(_dirname + 'index.html');
 });
 
 //app.listen(3000, () => console.log('Server running on http://localhost:3000'));
