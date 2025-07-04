@@ -1,5 +1,5 @@
 {
-  "name": "geofencapp",
+  "name": "geofencapp1",
   "version": "1.0.0",
   "main": "seed.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "08065377229",
   "license": "ISC",
   "dependencies": {
     "@turf/turf": "^7.2.0",
