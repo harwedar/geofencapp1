@@ -129,4 +129,8 @@ app.get('/api/vapid-public-key', (req, res) => {
   res.send({ key: vapidKeys.publicKey });
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(_dirname + 'admin.html');
+});
+
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));
