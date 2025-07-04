@@ -1,1 +1,71 @@
+... (admin HTML with login and fetch calls updated) ...
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+  <h2>Upload Region</h2>
+  <input type="file" id="geojson" />
+  <input type="text" id="regionId" placeholder="Region ID" />
+  <button onclick="uploadRegion()">Upload Region</button>
 
+  <h2>Assign Device to Region</h2>
+  <button onclick="loadPending()">Load Pending Devices</button>
+  <select id="pendingDevices"></select>
+  <input type="text" id="assignRegionId" placeholder="Assign to Region ID" />
+  <button onclick="assignDevice()">Assign Device</button>
+
+  <div id="map" style="height: 400px;"></div>
+
+  <script>
+    const map = L.map('map').setView([0, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    async function uploadRegion() {
+      const file = document.getElementById('geojson').files[0];
+      const text = await file.text();
+      const geojson = JSON.parse(text);
+      const regionId = document.getElementById('regionId').value;
+
+      await fetch('/api/upload-region', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ regionId, geojson })
+      });
+
+      L.geoJSON(geojson).addTo(map);
+      alert('Region uploaded');
+    }
+
+    async function loadPending() {
+      const res = await fetch('/api/pending-devices');
+      const devices = await res.json();
+      const select = document.getElementById('pendingDevices');
+      select.innerHTML = '';
+      devices.forEach(d => {
+        const option = document.createElement('option');
+        option.value = d.deviceId;
+        option.textContent = d.deviceId;
+        select.appendChild(option);
+      });
+    }
+
+    async function assignDevice() {
+      const deviceId = document.getElementById('pendingDevices').value;
+      const regionId = document.getElementById('assignRegionId').value;
+
+      await fetch('/api/assign-device', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deviceId, regionId })
+      });
+
+      alert('Device assigned');
+      loadPending(); // refresh list
+    }
+  </script>
+</body>
+</html>
