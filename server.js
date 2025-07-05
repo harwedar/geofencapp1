@@ -7,6 +7,7 @@ const cors = require('cors');
 const path = require('path');
 const webpush = require('web-push');
 const session = require('express-session');
+require("dotenv").config()
 
 const app = express();
 app.use(cors());
