@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 //app.use(express.static(__dirname));
-app.use(express.static(path.resolve(__dirname, "./admin.html")));
+//app.use(express.static(path.resolve(__dirname, "./admin.html")));
 app.use(session({ secret: 'adminsecret', resave: false, saveUninitialized: true }));
 
 mongoose.connect(
@@ -57,6 +57,10 @@ function auth(req, res, next) {
   if (req.session && req.session.user === 'admin') return next();
   return res.status(403).send('Unauthorized');
 }
+app.use(express.static(path.join(__dirname, "public")));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+});
 
 // Routes
 app.post('/api/login', async (req, res) => {
