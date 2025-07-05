@@ -11,7 +11,8 @@ const session = require('express-session');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname));
+//app.use(express.static(__dirname));
+app.use(express.static(path.resolve(__dirname, "./admin.html")));
 app.use(session({ secret: 'adminsecret', resave: false, saveUninitialized: true }));
 
 mongoose.connect(
